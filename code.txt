@@ -1,0 +1,24 @@
+int led = D7;
+int tempSensor=A0;
+int analogValue=0;
+// The on-board LED
+
+void setup() 
+{
+    pinMode(led,OUTPUT);
+    pinMode(tempSensor,INPUT);
+}
+
+
+void loop() 
+{
+    analogValue=analogRead(tempSensor);
+    digitalWrite(led, HIGH);   // Turn ON the LED
+
+  String temp_value = String(analogValue);
+  Particle.publish("temp", temp_value, PRIVATE);
+  delay(30000);               // Wait for 30 seconds
+
+  digitalWrite(led, LOW);    // Turn OFF the LED
+  delay(5000);               // Wait for 30 seconds
+}
